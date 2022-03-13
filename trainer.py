@@ -38,7 +38,7 @@ Directories:
 
 def run_loop(difficulty: str, density_level: str, is_random=False,
              hidden_h_params=None, hidden_e_params=None, lr_init=None, seed=None, n_iter=5000,
-             scheduled_lr=False, scheduler_period=500, log_freq=1, print_freq=5, flush_freq=10):
+             scheduled_lr=True, scheduler_period=500, log_freq=1, print_freq=5, flush_freq=10):
 
     # set timer and seed
     start_time = time.time()
@@ -106,10 +106,10 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
     scheduler, h_net_scheduler, e_net_scheduler = None, None, None
 
     lr_func = lambda itr: 0.5 ** itr
+
     if is_easy or is_medium:
         net = Net(input_size=state_dim, params=hidden_h_params, output_size=action_dim)
         optimizer = optim.Adam(net.parameters(), lr=lr_init)
-
         if scheduled_lr:
             scheduler = optim.lr_scheduler.LambdaLR(optimizer, lr_func)
     else:
@@ -160,7 +160,7 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
                     # if location is the same as previous, use previous reward immediately
                     if set(locations) == set(locations_final):
                         reward = rewards_all_iter[-1]
-                        print(f'At iteration {iteration} location not changed, use previous reward')
+                        print(f'At iteration {iteration} location not changed, use previous reward {reward}')
                     # else, run simulation and compute the reward
                     else:
                         toughness, _ = run.run_go_h(difficulty, exp_name, locations, iteration)
@@ -228,11 +228,11 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
             if set(locations_hydroxyl) == set(locations_hydroxyl_final) and \
                     set(locations_epoxide) == set(locations_epoxide_final):
                 reward = rewards_all_iter[-1]
-                print(f'At iteration {iteration} location not changed, use previous reward')
+                print(f'At iteration {iteration} location not changed, use previous reward {reward}')
             # else, run simulation and compute the reward
             else:
                 toughness, _ = run.run_go_he(difficulty, exp_name, locations_hydroxyl, locations_epoxide, iteration)
-                reward = toughness  # (toughness - baseline) / std
+                reward = (toughness - baseline) / std
             locations_hydroxyl_final = locations_hydroxyl.copy()
             locations_epoxide_final = locations_epoxide.copy()
             rewards_all_iter.append(reward)
