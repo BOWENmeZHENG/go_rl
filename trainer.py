@@ -77,7 +77,7 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
 
     # Select density level
     n_hydroxyl = settings[density_level]['HYDROXYL']
-    n_epoxide = settings[density_level]['HYDROXYL']
+    n_epoxide = settings[density_level]['EPOXIDE']
     if is_random:
         baseline = 0
         std = 1
