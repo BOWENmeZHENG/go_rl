@@ -169,13 +169,27 @@ def zero_infeasible(state, action_probs, is_hydroxyl=True):
             action_probs[index], action_probs[index + num_host_hydroxyl] = 0, 0
 
     else:  # action is to assign an epoxide group
-
+        atoms_indices_so_far = set()
         # set infeasible actions zero probability according to current epoxide distribution
         indices_e_upper = [i for i, state_entry in enumerate(s_e_upper) if state_entry == 1]
+        # generate atom indices from pair indices
         for index in indices_e_upper:
-            action_probs[index], action_probs[index + num_host_epoxide] = 0, 0
+            atom_pair = mapping[index]
+            atoms_indices_so_far.add(atom_pair[0])
+            atoms_indices_so_far.add(atom_pair[1])
         indices_e_lower = [i for i, state_entry in enumerate(s_e_lower) if state_entry == 1]
         for index in indices_e_lower:
+            atom_pair = mapping[index]
+            atoms_indices_so_far.add(atom_pair[0])
+            atoms_indices_so_far.add(atom_pair[1])
+
+        # zero illegal actions
+        atoms_indices_all = list(atoms_indices_so_far)
+
+        indices_to_zero = [i for i, pair in enumerate(mapping)
+                           if pair[0] in atoms_indices_all or pair[1] in atoms_indices_all]
+
+        for index in indices_to_zero:
             action_probs[index], action_probs[index + num_host_epoxide] = 0, 0
 
         # set infeasible actions zero probability according to current hydroxyl distribution
