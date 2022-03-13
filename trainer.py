@@ -11,17 +11,17 @@ from net import Net
 
 # Global settings
 EASY = {'STATE_DIM': 66,'ACTION_DIM': 66,
-        'LOW': {'BASELINE': 7.814, 'STD': 1.299},
-        'HIGH': {'BASELINE': 7.814, 'STD': 1.299}  # incorrect for now
+        'LOW': {'HYDROXYL': 10, 'EPOXIDE': 0, 'BASELINE': 7.814, 'STD': 1.299},
+        'HIGH': {'HYDROXYL': 20, 'EPOXIDE': 0, 'BASELINE': 7.814, 'STD': 1.299}  # incorrect for now
         }
 MEDIUM = {'NUM_HOST': 66, 'STATE_DIM': 132, 'ACTION_DIM': 132,
-          'LOW': {'BASELINE': 7.668, 'STD': 1.259},
-          'HIGH': {'BASELINE': 7.814, 'STD': 1.299}  # incorrect for now
+          'LOW': {'HYDROXYL': 10, 'EPOXIDE': 0, 'BASELINE': 7.668, 'STD': 1.259},
+          'HIGH': {'HYDROXYL': 20, 'EPOXIDE': 0, 'BASELINE': 7.814, 'STD': 1.299}  # incorrect for now
           }
 HARD = {'NUM_HOST_HYDROXYL': 66, 'STATE_DIM_HYDROXYL': 132, 'NUM_HOST_EPOXIDE': 88, 'STATE_DIM_EPOXIDE': 176,
         'STATE_DIM': 308, 'ACTION_H_DIM': 133, 'ACTION_E_DIM': 177,
-        'LOW': {'BASELINE': 7.086, 'STD': 1.308},
-        'HIGH': {'BASELINE': 7.814, 'STD': 1.299}  # incorrect for now
+        'LOW': {'HYDROXYL': 5, 'EPOXIDE': 4, 'BASELINE': 7.086, 'STD': 1.308},
+        'HIGH': {'HYDROXYL': 10, 'EPOXIDE': 8, 'BASELINE': 7.814, 'STD': 1.299}  # incorrect for now
         }
 DIFFICULTIES = (EASY, MEDIUM, HARD)
 
@@ -36,7 +36,7 @@ Directories:
 '''
 
 
-def run_loop(difficulty: str, density_level: str, is_random=False, n_hydroxyl=None, n_epoxide=None,
+def run_loop(difficulty: str, density_level: str, is_random=False,
              hidden_h_params=None, hidden_e_params=None, lr_init=None, seed=None, n_iter=5000,
              scheduled_lr=False, scheduler_period=500, log_freq=1, print_freq=5, flush_freq=10):
 
@@ -76,6 +76,8 @@ def run_loop(difficulty: str, density_level: str, is_random=False, n_hydroxyl=No
         action_e_dim = settings['ACTION_E_DIM']
 
     # Select density level
+    n_hydroxyl = settings[density_level]['HYDROXYL']
+    n_epoxide = settings[density_level]['HYDROXYL']
     if is_random:
         baseline = 0
         std = 1
