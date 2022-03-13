@@ -11,14 +11,17 @@ from net import Net
 
 # Global settings
 EASY = {'STATE_DIM': 66,'ACTION_DIM': 66,
-        'LOW': {'BASELINE': 7.814, 'STD': 1.299}
+        'LOW': {'BASELINE': 7.814, 'STD': 1.299},
+        'HIGH': {'BASELINE': 7.814, 'STD': 1.299}  # incorrect for now
         }
 MEDIUM = {'NUM_HOST': 66, 'STATE_DIM': 132, 'ACTION_DIM': 132,
-          'LOW': {'BASELINE': 7.668, 'STD': 1.259}
+          'LOW': {'BASELINE': 7.668, 'STD': 1.259},
+          'HIGH': {'BASELINE': 7.814, 'STD': 1.299}  # incorrect for now
           }
 HARD = {'NUM_HOST_HYDROXYL': 66, 'STATE_DIM_HYDROXYL': 132, 'NUM_HOST_EPOXIDE': 88, 'STATE_DIM_EPOXIDE': 176,
         'STATE_DIM': 308, 'ACTION_H_DIM': 133, 'ACTION_E_DIM': 177,
-        'LOW': {'BASELINE': 7.086, 'STD': 1.308}
+        'LOW': {'BASELINE': 7.086, 'STD': 1.308},
+        'HIGH': {'BASELINE': 7.814, 'STD': 1.299}  # incorrect for now
         }
 DIFFICULTIES = (EASY, MEDIUM, HARD)
 
