@@ -10,10 +10,16 @@ import nn_utils as nnut
 from net import Net
 
 # Global settings
-EASY = {'STATE_DIM': 66,'ACTION_DIM': 66, 'BASELINE': 7.814, 'STD': 1.299}
-MEDIUM = {'NUM_HOST': 66, 'STATE_DIM': 132, 'ACTION_DIM': 132, 'BASELINE': 7.668, 'STD': 1.259}
+EASY = {'STATE_DIM': 66,'ACTION_DIM': 66,
+        'LOW': {'BASELINE': 7.814, 'STD': 1.299}
+        }
+MEDIUM = {'NUM_HOST': 66, 'STATE_DIM': 132, 'ACTION_DIM': 132,
+          'LOW': {'BASELINE': 7.668, 'STD': 1.259}
+          }
 HARD = {'NUM_HOST_HYDROXYL': 66, 'STATE_DIM_HYDROXYL': 132, 'NUM_HOST_EPOXIDE': 88, 'STATE_DIM_EPOXIDE': 176,
-        'STATE_DIM': 308, 'ACTION_H_DIM': 133, 'ACTION_E_DIM': 177, 'BASELINE': 7.086, 'STD': 1.308}
+        'STATE_DIM': 308, 'ACTION_H_DIM': 133, 'ACTION_E_DIM': 177,
+        'LOW': {'BASELINE': 7.086, 'STD': 1.308}
+        }
 DIFFICULTIES = (EASY, MEDIUM, HARD)
 
 torch.autograd.set_detect_anomaly(True)
