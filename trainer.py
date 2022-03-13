@@ -20,11 +20,11 @@ torch.autograd.set_detect_anomaly(True)
 
 '''
 Directories: 
-/md/lammps_files
-/DATA/{difficulty}/{exp_name}/log_and_description
-/DATA/{difficulty}/{exp_name}/{simulation_name}/simulation_files
-/DATA/{difficulty}/random/random.csv
-/DATA/{difficulty}/FIGURES/
+./md/lammps_files
+./DATA/{difficulty}/{exp_name}/log_and_description
+./DATA/{difficulty}/{exp_name}/{simulation_name}/simulation_files
+./DATA/{difficulty}/random/random.csv
+./DATA/{difficulty}/FIGURES/
 '''
 
 
