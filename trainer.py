@@ -38,7 +38,7 @@ Directories:
 
 def run_loop(difficulty: str, density_level: str, is_random=False,
              hidden_h_params=None, hidden_e_params=None, lr_init=None, seed=None, n_iter=5000,
-             scheduled_lr=True, scheduler_period=500, log_freq=1, print_freq=5, flush_freq=10):
+             scheduled_lr=True, scheduler_period=500, lr_smallest=1e-4, log_freq=1, print_freq=5, flush_freq=10):
 
     # set timer and seed
     start_time = time.time()
@@ -131,7 +131,9 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
     if is_easy or is_medium:
         locations_final = []
         for iteration in range(n_iter):
-            print("Current learning rate:", optimizer.param_groups[0]['lr'])
+            lr_current = optimizer.param_groups[0]['lr']
+            if iteration % 100 ==0:
+                print(f"Current learning rate: {lr_current}")
             state = [0] * state_dim
             state_tensor = torch.tensor(state, dtype=torch.float)
             locations = []
@@ -174,7 +176,7 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
                 loss.backward()
                 optimizer.step()
                 if scheduled_lr:
-                    if iteration % scheduler_period == 0 and iteration != 0  and iteration < 2000:
+                    if iteration % scheduler_period == 0 and iteration != 0 and lr_current > lr_smallest:
                         scheduler.step()
 
             utils.print_log(file_log, iteration, reward, print_freq, log_freq, flush_freq)
@@ -183,6 +185,9 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
         locations_hydroxyl_final = []
         locations_epoxide_final = []
         for iteration in range(n_iter):
+            lr_current = optimizer.param_groups[0]['lr']
+            if iteration % 100 == 0:
+                print(f"Current learning rate: {lr_current}")
             m, n = n_hydroxyl, n_epoxide
             state = [0] * state_dim
             state_tensor = torch.tensor(state, dtype=torch.float)
@@ -247,7 +252,7 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
                 loss.backward()
                 optimizer.step()
                 if scheduled_lr:
-                    if iteration % scheduler_period == 0 and iteration != 0 and iteration < 2000:
+                    if iteration % scheduler_period == 0 and iteration != 0 and lr_current > lr_smallest:
                         scheduler.step()
 
             utils.print_log(file_log, iteration, reward, print_freq, log_freq, flush_freq)
