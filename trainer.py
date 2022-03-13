@@ -34,7 +34,7 @@ Directories:
 
 
 def run_loop(difficulty: str, is_random=False, n_hydroxyl=None, n_epoxide=None,
-             hidden_h_params=None, hidden_e_params=None, lr_init=None, seed=None, n_iter=2000,
+             hidden_h_params=None, hidden_e_params=None, lr_init=None, seed=None, n_iter=5000,
              scheduled_lr=False, scheduler_period=500, log_freq=1, print_freq=5, flush_freq=10):
 
     # set timer and seed
