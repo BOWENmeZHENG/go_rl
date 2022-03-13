@@ -36,7 +36,7 @@ Directories:
 '''
 
 
-def run_loop(difficulty: str, is_random=False, n_hydroxyl=None, n_epoxide=None,
+def run_loop(difficulty: str, density_level: str, is_random=False, n_hydroxyl=None, n_epoxide=None,
              hidden_h_params=None, hidden_e_params=None, lr_init=None, seed=None, n_iter=5000,
              scheduled_lr=False, scheduler_period=500, log_freq=1, print_freq=5, flush_freq=10):
 
@@ -46,6 +46,7 @@ def run_loop(difficulty: str, is_random=False, n_hydroxyl=None, n_epoxide=None,
     torch.manual_seed(seed)
     np.random.seed(seed)
 
+    # Select difficulty
     is_easy = difficulty == "easy"
     is_medium = difficulty == "medium"
     is_hard = difficulty == "hard"
@@ -74,8 +75,9 @@ def run_loop(difficulty: str, is_random=False, n_hydroxyl=None, n_epoxide=None,
         action_h_dim = settings['ACTION_H_DIM']
         action_e_dim = settings['ACTION_E_DIM']
 
-    baseline = settings['BASELINE']
-    std = settings['STD']
+    # Select density level
+    baseline = settings[density_level]['BASELINE']
+    std = settings[density_level]['STD']
 
     # dump results
     exp_path = f"DATA/{difficulty}"
