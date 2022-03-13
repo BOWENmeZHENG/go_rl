@@ -98,7 +98,7 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
         exp_name = f"random_{density_level}"
         os.makedirs(f"{exp_path}/{exp_name}")
     file_log = open(f'{exp_path}/{exp_name}/{exp_name}.csv', 'w')
-    file_log.write('Trajectory,Reward\n')
+    file_log.write('Iteration,Reward\n')
 
     # Declare networks and optimizers
     net, h_net, e_net = None, None, None
