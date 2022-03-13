@@ -95,7 +95,7 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
         utils.write_description(difficulty, exp_name, n_hydroxyl, n_epoxide, hidden_h_params, hidden_e_params,
                                 lr_init, seed, scheduled_lr, scheduler_period)
     else:
-        exp_name = "random"
+        exp_name = f"random_{density_level}"
         os.makedirs(f"{exp_path}/{exp_name}")
     file_log = open(f'{exp_path}/{exp_name}/{exp_name}.csv', 'w')
     file_log.write('Trajectory,Reward\n')
