@@ -76,8 +76,12 @@ def run_loop(difficulty: str, density_level: str, is_random=False, n_hydroxyl=No
         action_e_dim = settings['ACTION_E_DIM']
 
     # Select density level
-    baseline = settings[density_level]['BASELINE']
-    std = settings[density_level]['STD']
+    if is_random:
+        baseline = 0
+        std = 1
+    else:
+        baseline = settings[density_level]['BASELINE']
+        std = settings[density_level]['STD']
 
     # dump results
     exp_path = f"DATA/{difficulty}"
