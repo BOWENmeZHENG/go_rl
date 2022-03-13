@@ -22,7 +22,6 @@ HARD = {'NUM_HOST_HYDROXYL': 66, 'STATE_DIM_HYDROXYL': 132, 'NUM_HOST_EPOXIDE': 
         }
 DIFFICULTIES = (EASY, MEDIUM, HARD)
 
-torch.autograd.set_detect_anomaly(True)
 
 '''
 Directories: 
