@@ -185,9 +185,7 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
         locations_hydroxyl_final = []
         locations_epoxide_final = []
         for iteration in range(n_iter):
-            lr_current = optimizer.param_groups[0]['lr']
-            if iteration % 100 == 0:
-                print(f"Current learning rate: {lr_current}")
+            lr_current = None
             m, n = n_hydroxyl, n_epoxide
             state = [0] * state_dim
             state_tensor = torch.tensor(state, dtype=torch.float)
@@ -199,8 +197,11 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
                 # randomly pick a net
                 net_index, m, n, func_net, optimizer, scheduler = nnut.pick_net(m, n, h_net, e_net,
                     h_net_optimizer, e_net_optimizer, scheduled_lr, h_net_scheduler, e_net_scheduler)
+                lr_current = optimizer.param_groups[0]['lr']
                 if m + n == 0:
                     final_net = net_index
+                    if iteration % 100 == 0:
+                        print(f"Current learning rate: {lr_current}")
                 # assign one functional group using func_net
                 if not is_random:
                     action_probs = func_net(state_tensor)
