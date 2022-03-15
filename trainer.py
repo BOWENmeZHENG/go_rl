@@ -12,7 +12,7 @@ from net import Net
 # Global settings
 EASY = {'STATE_DIM': 66,'ACTION_DIM': 66,
         'LOW': {'HYDROXYL': 10, 'EPOXIDE': 0, 'BASELINE': 7.814, 'STD': 1.299},
-        'HIGH': {'HYDROXYL': 20, 'EPOXIDE': 0, 'BASELINE': 7.814, 'STD': 1.299}  # incorrect for now
+        'HIGH': {'HYDROXYL': 20, 'EPOXIDE': 0, 'BASELINE': 7.694, 'STD': 1.368}  # incorrect for now
         }
 MEDIUM = {'NUM_HOST': 66, 'STATE_DIM': 132, 'ACTION_DIM': 132,
           'LOW': {'HYDROXYL': 10, 'EPOXIDE': 0, 'BASELINE': 7.668, 'STD': 1.259},
