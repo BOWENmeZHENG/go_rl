@@ -12,11 +12,11 @@ from net import Net
 # Global settings
 EASY = {'STATE_DIM': 66,'ACTION_DIM': 66,
         'LOW': {'HYDROXYL': 10, 'EPOXIDE': 0, 'BASELINE': 7.814, 'STD': 1.299},
-        'HIGH': {'HYDROXYL': 20, 'EPOXIDE': 0, 'BASELINE': 7.694, 'STD': 1.368}  # incorrect for now
+        'HIGH': {'HYDROXYL': 20, 'EPOXIDE': 0, 'BASELINE': 7.694, 'STD': 1.368}
         }
 MEDIUM = {'NUM_HOST': 66, 'STATE_DIM': 132, 'ACTION_DIM': 132,
           'LOW': {'HYDROXYL': 10, 'EPOXIDE': 0, 'BASELINE': 7.668, 'STD': 1.259},
-          'HIGH': {'HYDROXYL': 20, 'EPOXIDE': 0, 'BASELINE': 7.814, 'STD': 1.299}  # incorrect for now
+          'HIGH': {'HYDROXYL': 20, 'EPOXIDE': 0, 'BASELINE': 7.245, 'STD': 1.355}
           }
 HARD = {'NUM_HOST_HYDROXYL': 66, 'STATE_DIM_HYDROXYL': 132, 'NUM_HOST_EPOXIDE': 88, 'STATE_DIM_EPOXIDE': 176,
         'STATE_DIM': 308, 'ACTION_H_DIM': 133, 'ACTION_E_DIM': 177,
