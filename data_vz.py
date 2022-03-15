@@ -25,8 +25,8 @@ def load_results(difficulty: str):
     return all_results
 
 
-def load_random(difficulty: str):
-    random_path = f"DATA/{difficulty}/random/random.csv"
+def load_random(difficulty: str, density_level: str):
+    random_path = f"./DATA/{difficulty}/random_{density_level}/random_{density_level}.csv"
     result = pd.read_csv(random_path)["Reward"]
     return result.mean(), result.std()
 
