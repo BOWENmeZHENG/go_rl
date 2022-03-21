@@ -201,7 +201,8 @@ def run_loop(difficulty: str, density_level: str, is_random=False,
                 if m + n == 0:
                     final_net = net_index
                     if iteration % 100 == 0:
-                        print(f"Current learning rate: {lr_current}")
+                        net_name = "h_net" if final_net == 1 else "e_net"
+                        print(f"Current learning rate of {net_name}: {lr_current}")
                 # assign one functional group using func_net
                 if not is_random:
                     action_probs = func_net(state_tensor)
