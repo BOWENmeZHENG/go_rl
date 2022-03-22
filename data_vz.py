@@ -64,13 +64,13 @@ def plot_results(difficulty: str, all_results: dict, keys: list, length: int,
             plt.plot(x4plot, results4plot[key]["Reward"][:length], label=key, linewidth=linewidth)
 
     if last_fig:
-        plt.title("Learning Curve(s)", fontsize=14)
-        plt.xlabel("Iteration", fontsize=12)
-        plt.ylabel("Reward", fontsize=12)
+        plt.title(f"{difficulty}".title(), fontsize=20)
+        plt.xlabel("Iteration", fontsize=20)
+        plt.ylabel("Reward", fontsize=20)
         if use_legend:
-            plt.legend(fontsize=10, loc="lower right", edgecolor="black")
-        plt.xticks(fontsize=10)
-        plt.yticks(fontsize=10)
+            plt.legend(fontsize=16, loc="lower right", edgecolor="black")
+        plt.xticks(fontsize=16)
+        plt.yticks(fontsize=16)
 
         if not os.path.exists(fig_path):
             os.mkdir(fig_path)
@@ -94,15 +94,15 @@ def plot_stress_strain(curve: str, first_fig: bool, last_fig: bool, label_name: 
     plt.plot(strain, stress, linewidth=1.5, label=label_name)
 
     if last_fig:
-        plt.title("Stress-Strain Curve(s)", fontsize=14)
-        plt.xlabel("Strain", fontsize=12)
-        plt.ylabel("Stress (GPa)", fontsize=12)
-        plt.xticks(fontsize=10)
-        plt.yticks(fontsize=10)
+        # plt.title("Stress-Strain Curves", fontsize=14)
+        plt.xlabel("Strain", fontsize=14)
+        plt.ylabel("Stress (GPa)", fontsize=14)
+        plt.xticks(fontsize=12)
+        plt.yticks(fontsize=12)
         if ref_data is not None:
             ref_curve = pd.read_csv(ref_data)
             plt.plot(ref_curve["strain"], ref_curve["stress"], label="RSC Adv., 2020, 10, 29610")
-        plt.legend(fontsize=10, loc="lower right", edgecolor="black")
+        plt.legend(fontsize=12, loc="lower right", edgecolor="black")
         fig_path = "FIGURES"
         if not os.path.exists(fig_path):
             os.mkdir(fig_path)
