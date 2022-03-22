@@ -66,7 +66,7 @@ def plot_results(difficulty: str, all_results: dict, keys: list, length: int,
     if last_fig:
         plt.title(f"{difficulty}".title(), fontsize=20)
         plt.xlabel("Iteration", fontsize=20)
-        plt.ylabel("Reward", fontsize=20)
+        plt.ylabel("Return", fontsize=20)
         if use_legend:
             plt.legend(fontsize=16, loc="lower right", edgecolor="black")
         plt.xticks(fontsize=16)
