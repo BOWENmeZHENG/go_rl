@@ -3,6 +3,19 @@ from scipy.stats import bernoulli
 
 def pick_net(m, n, h_net, e_net, h_net_optimizer, e_net_optimizer,
              scheduled_lr=None, h_net_scheduler=None, e_net_scheduler=None):
+    """
+    Pick H_Net or E_Net using a Bernoulli distribution
+    :param m: number of hydroxyl groups left
+    :param n: number of epoxide groups left
+    :param h_net: current H_Net
+    :param e_net: current E_Net
+    :param h_net_optimizer: current H_Net optimizer
+    :param e_net_optimizer: current E_Net optimizer
+    :param scheduled_lr: Bool, whether a learning rate scheduler is used
+    :param h_net_scheduler: H_Net scheduler
+    :param e_net_scheduler: E_Net scheduler
+    :return: net_index, m, n, func_net, optimizer, scheduler
+    """
     scheduler = None
     net_index = bernoulli(m / (m + n)).rvs()
     if net_index == 1:
