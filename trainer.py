@@ -39,6 +39,25 @@ Directories:
 def run_loop(difficulty: str, density_level: str, is_random=False,
              hidden_h_params=None, hidden_e_params=None, lr_init=None, seed=None, n_iter=5000,
              scheduled_lr=True, scheduler_period=500, lr_smallest=1e-4, log_freq=1, print_freq=5, flush_freq=10):
+    """
+    Main RL loop
+
+    :param difficulty: "easy", "medium", or "hard"
+    :param density_level: "LOW" or "HIGH"
+    :param is_random: True only when calculating
+    :param hidden_h_params: list, [layer_1_size, layer_2_size, ...] for H_Net
+    :param hidden_e_params: list, [layer_1_size, layer_2_size, ...] for E_Net, None for Easy and Medium
+    :param lr_init: Initial learning rate, 1e-3 recommended
+    :param seed: random seed
+    :param n_iter: number of iterations/episodes to run
+    :param scheduled_lr: if True, learning rate is reduced by half every scheduler_period iterations
+    :param scheduler_period: learning rate is reduced by half every scheduler_period iterations
+    :param lr_smallest: smallest learning rate is capped at this
+    :param log_freq: frequency to print results to the log file
+    :param print_freq: frequency to print results to the console
+    :param flush_freq: frequency to update the log file
+    :return:
+    """
 
     # set timer and seed
     start_time = time.time()
