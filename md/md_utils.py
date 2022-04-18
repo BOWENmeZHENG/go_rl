@@ -6,6 +6,9 @@ BL = 1.421
 
 
 def basal_plane() -> tuple:
+    """
+    Define graphene basal plane for MD simulation.
+    """
     n = 7
     m = 5
     total_atom = 2 + 4 * n + (2 * n + 2) * (m - 1)
@@ -64,6 +67,16 @@ def basal_plane() -> tuple:
 
 
 def assemble(atoms_fixed, atoms_move, atoms_relax, atoms_coh_o, atoms_coh_h, atoms_coc=None):
+    """
+    Assemble GBP and functional group atoms for MD simulation
+    :param atoms_fixed: fixed GBP atoms
+    :param atoms_move: GBP atoms for loading
+    :param atoms_relax: GBP atoms that host functional groups
+    :param atoms_coh_o: Oxygen atoms for hydroxyl groups
+    :param atoms_coh_h: Hydrogen atoms for hydroxyl groups
+    :param atoms_coc: Oxygen atoms for epoxide groups
+    :return: atoms_xyz
+    """
     num_atoms_fixed = np.shape(atoms_fixed)[0]
     num_atoms_move = np.shape(atoms_move)[0]
     num_atoms_relax = np.shape(atoms_relax)[0]
@@ -82,6 +95,13 @@ def assemble(atoms_fixed, atoms_move, atoms_relax, atoms_coh_o, atoms_coh_h, ato
     return atoms_xyz
 
 def assemble_graphene(atoms_fixed, atoms_move, atoms_relax):
+    """
+    Assemble atoms for empty graphene
+    :param atoms_fixed: fixed atoms
+    :param atoms_move: atoms for loading
+    :param atoms_relax: atoms that relax
+    :return: atoms_xyz
+    """
     num_atoms_fixed = np.shape(atoms_fixed)[0]
     num_atoms_move = np.shape(atoms_move)[0]
     num_atoms_relax = np.shape(atoms_relax)[0]
@@ -93,6 +113,9 @@ def assemble_graphene(atoms_fixed, atoms_move, atoms_relax):
 
 
 def write_data(difficulty: str, exp_name: str, simulation_name: str, atoms_xyz, is_graphene_oxide=True):
+    """
+    Write .data file for MD simulation
+    """
     xlo = min(atoms_xyz[:, 2]) - 20
     xhi = max(atoms_xyz[:, 2]) + 20
     ylo = min(atoms_xyz[:, 3]) - 5
@@ -128,6 +151,9 @@ def write_data(difficulty: str, exp_name: str, simulation_name: str, atoms_xyz, 
 
 
 def write_in(difficulty: str, exp_name: str, simulation_name: str, atoms_xyz, is_graphene_oxide=True):
+    """
+    Write .in file for MD simulation
+    """
     simulation_path = f'DATA/{difficulty}/{exp_name}'
     if not os.path.exists(f'{simulation_path}/{simulation_name}'):
         os.makedirs(f'{simulation_path}/{simulation_name}')
@@ -184,6 +210,9 @@ def write_in(difficulty: str, exp_name: str, simulation_name: str, atoms_xyz, is
 
 
 def run_md(difficulty: str, exp_name: str, simulation_name: str):
+    """
+    run MD simulation
+    """
     simulation_path = f'DATA/{difficulty}/{exp_name}'
     copyfile('md/lmp_serial', f'{simulation_path}/{simulation_name}/lmp_serial')
     copyfile('md/ffield.reax.cho', f'{simulation_path}/{simulation_name}/ffield.reax.cho')
